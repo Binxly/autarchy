@@ -1,20 +1,20 @@
 #!/bin/bash
 
-omarchy_path="$HOME/.local/share/omarchy"
+autarchy_path="$HOME/.local/share/autarchy"
 
 # Ensure remote is reachable
-if ! git -C "$omarchy_path" ls-remote &>/dev/null; then
+if ! git -C "$autarchy_path" ls-remote &>/dev/null; then
   echo "Error: Unable to reach remote repository."
   exit 1
 fi
 
-latest_tag=$(git -C "$omarchy_path" ls-remote --tags origin | grep -v "{}" | awk '{print $2}' | sed 's#refs/tags/##' | sort -V | tail -n 1)
-current_tag=$(git -C "$omarchy_path" describe --tags $(git -C "$omarchy_path" rev-list --tags --max-count=1))
+latest_tag=$(git -C "$autarchy_path" ls-remote --tags origin | grep -v "{}" | awk '{print $2}' | sed 's#refs/tags/##' | sort -V | tail -n 1)
+current_tag=$(git -C "$autarchy_path" describe --tags $(git -C "$autarchy_path" rev-list --tags --max-count=1))
 
 if [[ "$current_tag" != "$latest_tag" ]]; then
-  echo "Omarchy update available ($latest_tag)"
+  echo "Autarchy update available ($latest_tag)"
   exit 0
 else
-  echo "Omarchy is up to date ($current_tag)"
+  echo "Autarchy is up to date ($current_tag)"
   exit 1
 fi

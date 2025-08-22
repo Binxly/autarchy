@@ -1,3 +1,3 @@
 #!/bin/bash
 
-omarchy-restart-app waybar
+autarchy-restart-app waybar

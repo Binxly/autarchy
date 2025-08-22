@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# omarchy-theme-remove: Remove a theme from Omarchy by name
-# Usage: omarchy-theme-remove <theme-name>
+# autarchy-theme-remove: Remove a theme from Autarchy by name
+# Usage: autarchy-theme-remove <theme-name>
 
 if [ -z "$1" ]; then
-  mapfile -t extra_themes < <(find ~/.config/omarchy/themes -mindepth 1 -maxdepth 1 -type d ! -xtype l -printf '%f\n')
+  mapfile -t extra_themes < <(find ~/.config/autarchy/themes -mindepth 1 -maxdepth 1 -type d ! -xtype l -printf '%f\n')
 
   if [[ ${#extra_themes[@]} -gt 0 ]]; then
     THEME_NAME=$(gum choose --header="Remove extra theme" "${extra_themes[@]}")
@@ -16,8 +16,8 @@ else
   THEME_NAME="$1"
 fi
 
-THEMES_DIR="$HOME/.config/omarchy/themes"
-CURRENT_DIR="$HOME/.config/omarchy/current"
+THEMES_DIR="$HOME/.config/autarchy/themes"
+CURRENT_DIR="$HOME/.config/autarchy/current"
 THEME_PATH="$THEMES_DIR/$THEME_NAME"
 
 # Ensure a theme was set
@@ -33,7 +33,7 @@ fi
 
 # Move to the next theme if the current theme is the one being removed
 if [ "$(readlink -f "$CURRENT_DIR/theme")" = "$(readlink -f "$THEME_PATH")" ]; then
-  omarchy-theme-next
+  autarchy-theme-next
 fi
 
 # Now remove the theme directory for THEME_NAME

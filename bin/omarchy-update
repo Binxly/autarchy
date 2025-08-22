@@ -2,8 +2,8 @@
 
 set -e
 
-omarchy-update-git
-omarchy-migrate
-omarchy-update-system-pkgs
-omarchy-update-restart
-omarchy-restart-waybar # removes update-available icon
+autarchy-update-git
+autarchy-migrate
+autarchy-update-system-pkgs
+autarchy-update-restart
+autarchy-restart-waybar # removes update-available icon

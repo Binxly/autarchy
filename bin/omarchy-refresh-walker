@@ -1,4 +1,4 @@
 #!/bin/bash
 
-omarchy-refresh-config walker/config.toml
-omarchy-restart-walker
+autarchy-refresh-config walker/config.toml
+autarchy-restart-walker

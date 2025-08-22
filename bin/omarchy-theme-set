@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# omarchy-theme-set: Set a theme, specified by its name.
-# Usage: omarchy-theme-set <theme-name>
+# autarchy-theme-set: Set a theme, specified by its name.
+# Usage: autarchy-theme-set <theme-name>
 
 if [[ -z "$1" && "$1" != "CNCLD" ]]; then
-  echo "Usage: omarchy-theme-set <theme-name>" >&2
+  echo "Usage: autarchy-theme-set <theme-name>" >&2
   exit 1
 fi
 
-THEMES_DIR="$HOME/.config/omarchy/themes/"
-CURRENT_THEME_DIR="$HOME/.config/omarchy/current/theme"
+THEMES_DIR="$HOME/.config/autarchy/themes/"
+CURRENT_THEME_DIR="$HOME/.config/autarchy/current/theme"
 
 THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 THEME_PATH="$THEMES_DIR/$THEME_NAME"
@@ -24,7 +24,7 @@ fi
 ln -nsf "$THEME_PATH" "$CURRENT_THEME_DIR"
 
 # Change gnome modes
-if [[ -f ~/.config/omarchy/current/theme/light.mode ]]; then
+if [[ -f ~/.config/autarchy/current/theme/light.mode ]]; then
   gsettings set org.gnome.desktop.interface color-scheme "prefer-light"
   gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
 else
@@ -33,8 +33,8 @@ else
 fi
 
 # Change gnome icon theme color
-if [[ -f ~/.config/omarchy/current/theme/icons.theme ]]; then
-  gsettings set org.gnome.desktop.interface icon-theme "$(<~/.config/omarchy/current/theme/icons.theme)"
+if [[ -f ~/.config/autarchy/current/theme/icons.theme ]]; then
+  gsettings set org.gnome.desktop.interface icon-theme "$(<~/.config/autarchy/current/theme/icons.theme)"
 else
   gsettings set org.gnome.desktop.interface icon-theme "Yaru-blue"
 fi
@@ -44,10 +44,10 @@ touch "$HOME/.config/alacritty/alacritty.toml"
 
 # Restart components to apply new theme
 pkill -SIGUSR2 btop
-omarchy-restart-waybar
-omarchy-restart-swayosd
+autarchy-restart-waybar
+autarchy-restart-swayosd
 makoctl reload
 hyprctl reload
 
 # Set new background
-omarchy-theme-bg-next
+autarchy-theme-bg-next

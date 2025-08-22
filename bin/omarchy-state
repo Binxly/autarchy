@@ -1,18 +1,18 @@
 #!/bin/bash
 
-STATE_DIR="$HOME/.local/state/omarchy"
+STATE_DIR="$HOME/.local/state/autarchy"
 mkdir -p "$STATE_DIR"
 
 COMMAND="$1"
 STATE_NAME="$2"
 
 if [[ -z "$COMMAND" ]]; then
-  echo "Usage: omarchy-state <set|clear> <state-name-or-pattern>"
+  echo "Usage: autarchy-state <set|clear> <state-name-or-pattern>"
   exit 1
 fi
 
 if [[ -z "$STATE_NAME" ]]; then
-  echo "Usage: omarchy-state $COMMAND <state-name>"
+  echo "Usage: autarchy-state $COMMAND <state-name>"
   exit 1
 fi
 

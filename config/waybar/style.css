@@ -1,4 +1,4 @@
-@import "../omarchy/current/theme/waybar.css";
+@import "../autarchy/current/theme/waybar.css";
 
 * {
   background-color: @background;
@@ -37,7 +37,7 @@
 #bluetooth,
 #pulseaudio,
 #clock,
-#custom-omarchy {
+#custom-autarchy {
   min-width: 12px;
   margin: 0 7.5px;
 }

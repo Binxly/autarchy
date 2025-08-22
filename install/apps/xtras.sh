@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$OMARCHY_BARE" ]; then
+if [ -z "$AUTARCHY_BARE" ]; then
   yay -S --noconfirm --needed \
     gnome-calculator gnome-keyring signal-desktop \
     obsidian-bin libreoffice obs-studio kdenlive \
@@ -16,5 +16,5 @@ if [ -z "$OMARCHY_BARE" ]; then
     echo -e "\e[31mFailed to install 1password. Continuing without!\e[0m"
 fi
 
-# Copy over Omarchy applications
-source omarchy-refresh-applications || true
+# Copy over Autarchy applications
+source autarchy-refresh-applications || true
