@@ -10,14 +10,12 @@ OMARCHY_INSTALL=~/.local/share/omarchy/install
 catch_errors() {
   echo -e "\n\e[31mOmarchy installation failed!\e[0m"
   echo "You can retry by running: bash ~/.local/share/omarchy/install.sh"
-  echo "Get help from the community: https://discord.gg/tXFUdasqhY"
 }
 
 trap catch_errors ERR
 
 show_logo() {
   clear
-  # tte -i ~/.local/share/omarchy/logo.txt --frame-rate ${2:-120} ${1:-expand}
   cat <~/.local/share/omarchy/logo.txt
   echo
 }
@@ -35,7 +33,7 @@ source $OMARCHY_INSTALL/preflight/migrations.sh
 
 # Configuration
 show_logo beams 240
-show_subtext "Let's install Omarchy! [1/5]"
+show_subtext "Let's install Autarchy! [1/5]"
 source $OMARCHY_INSTALL/config/identification.sh
 source $OMARCHY_INSTALL/config/config.sh
 source $OMARCHY_INSTALL/config/detect-keyboard-layout.sh

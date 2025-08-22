@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copy over Omarchy configs
+# Copy over configs
 cp -R ~/.local/share/omarchy/config/* ~/.config/
 
 # Use default bashrc from Omarchy
