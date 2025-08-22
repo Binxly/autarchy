@@ -1,0 +1,4 @@
+#!/bin/bash
+
+autarchy-refresh-config hypr/hyprsunset.conf
+autarchy-restart-hyprsunset

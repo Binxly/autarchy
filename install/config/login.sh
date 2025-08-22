@@ -84,12 +84,12 @@ elif [ -d "/etc/cmdline.d" ]; then # UKI
   # Relying on mkinitcpio to assemble a UKI
   # https://wiki.archlinux.org/title/Unified_kernel_image
   if ! grep -q splash /etc/cmdline.d/*.conf; then
-    # Need splash, create the omarchy file
-    echo "splash" | sudo tee -a /etc/cmdline.d/omarchy.conf
+    # Need splash, create the autarchy file
+    echo "splash" | sudo tee -a /etc/cmdline.d/autarchy.conf
   fi
   if ! grep -q quiet /etc/cmdline.d/*.conf; then
-    # Need quiet, create or append the omarchy file
-    echo "quiet" | sudo tee -a /etc/cmdline.d/omarchy.conf
+    # Need quiet, create or append the autarchy file
+    echo "quiet" | sudo tee -a /etc/cmdline.d/autarchy.conf
   fi
 elif [ -f "/etc/kernel/cmdline" ]; then # UKI Alternate
   # Alternate UKI kernel cmdline location
@@ -123,9 +123,9 @@ else
   echo ""
 fi
 
-if [ "$(plymouth-set-default-theme)" != "omarchy" ]; then
-  sudo cp -r "$HOME/.local/share/omarchy/default/plymouth" /usr/share/plymouth/themes/omarchy/
-  sudo plymouth-set-default-theme -R omarchy
+if [ "$(plymouth-set-default-theme)" != "autarchy" ]; then
+  sudo cp -r "$HOME/.local/share/autarchy/default/plymouth" /usr/share/plymouth/themes/autarchy/
+  sudo plymouth-set-default-theme -R autarchy
 fi
 
 # ==============================================================================
@@ -213,11 +213,11 @@ CCODE
   rm /tmp/seamless-login.c
 fi
 
-if [ ! -f /etc/systemd/system/omarchy-seamless-login.service ]; then
-  cat <<EOF | sudo tee /etc/systemd/system/omarchy-seamless-login.service
+if [ ! -f /etc/systemd/system/autarchy-seamless-login.service ]; then
+  cat <<EOF | sudo tee /etc/systemd/system/autarchy-seamless-login.service
 [Unit]
-Description=Omarchy Seamless Auto-Login
-Documentation=https://github.com/basecamp/omarchy
+Description=Autarchy Seamless Auto-Login
+Documentation=https://github.com/basecamp/autarchy
 Conflicts=getty@tty1.service
 After=systemd-user-sessions.service getty@tty1.service plymouth-quit.service systemd-logind.service
 PartOf=graphical.target
@@ -257,9 +257,9 @@ if ! systemctl is-enabled plymouth-quit-wait.service | grep -q masked; then
   sudo systemctl daemon-reload
 fi
 
-# Enable omarchy-seamless-login.service only if not already enabled
-if ! systemctl is-enabled omarchy-seamless-login.service | grep -q enabled; then
-  sudo systemctl enable omarchy-seamless-login.service
+# Enable autarchy-seamless-login.service only if not already enabled
+if ! systemctl is-enabled autarchy-seamless-login.service | grep -q enabled; then
+  sudo systemctl enable autarchy-seamless-login.service
 fi
 
 # Disable getty@tty1.service only if not already disabled

@@ -1,2 +1,2 @@
-echo "Remove old Omarchy TUI app now that we have the Omarchy Menu"
-rm ~/.local/share/applications/omarchy.desktop
+echo "Remove old Autarchy TUI app now that we have the Autarchy Menu"
+rm ~/.local/share/applications/autarchy.desktop

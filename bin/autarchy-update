@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+autarchy-update-git
+autarchy-migrate
+autarchy-update-system-pkgs
+autarchy-update-restart
+autarchy-restart-waybar # removes update-available icon

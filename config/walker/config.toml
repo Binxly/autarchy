@@ -1,7 +1,7 @@
 close_when_open = true
-theme = "omarchy-default"
+theme = "autarchy-default"
 theme_base = []
-theme_location = ["~/.local/share/omarchy/default/walker/themes/"]
+theme_location = ["~/.local/share/autarchy/default/walker/themes/"]
 hotreload_theme = true
 force_keyboard_focus = true
 
@@ -36,14 +36,14 @@ hide_category = true
 hidden = true
 
 [[builtins.bookmarks.entries]]
-label = "Omarchy - Github"
-url = "https://github.com/basecamp/omarchy"
-keywords = ["omarchy", "github"]
+label = "Autarchy - Github"
+url = "https://github.com/basecamp/autarchy"
+keywords = ["autarchy", "github"]
 
 [[builtins.bookmarks.entries]]
-label = "Omarchy Manual"
-url = "https://manuals.omamix.org/2/the-omarchy-manual"
-keywords = ["omarchy"]
+label = "Autarchy Manual"
+url = "https://manuals.omamix.org/2/the-autarchy-manual"
+keywords = ["autarchy"]
 
 [builtins.calc]
 name = "Calculator"

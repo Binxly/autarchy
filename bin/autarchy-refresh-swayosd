@@ -1,0 +1,5 @@
+#!/bin/bash
+
+autarchy-refresh-config swayosd/config.toml
+autarchy-refresh-config swayosd/style.css
+autarchy-restart-swayosd

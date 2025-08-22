@@ -1,0 +1,3 @@
+#!/bin/bash
+
+autarchy-restart-app hyprsunset

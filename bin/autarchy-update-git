@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -e "\e[32mUpdate Autarchy\e[0m"
+git -C $AUTARCHY_PATH pull --autostash
+git -C $AUTARCHY_PATH diff --check || git -C $AUTARCHY_PATH reset --merge

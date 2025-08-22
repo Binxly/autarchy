@@ -1,0 +1,5 @@
+#!/bin/bash
+
+autarchy-refresh-config waybar/config.jsonc
+autarchy-refresh-config waybar/style.css
+autarchy-restart-waybar

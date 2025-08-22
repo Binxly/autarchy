@@ -1,2 +1,2 @@
 echo "Add chromium-flags.conf"
-omarchy-refresh-config chromium-flags.conf
+autarchy-refresh-config chromium-flags.conf
