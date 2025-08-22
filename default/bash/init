@@ -14,3 +14,19 @@ if command -v fzf &> /dev/null; then
     source /usr/share/fzf/key-bindings.bash
   fi
 fi
+
+# TMUX auto-attachment
+if [ -n "$DISPLAY" ] && [ -z "$TMUX" ] && [ -z "$SSH_CLIENT" ] && command -v tmux >/dev/null 2>&1; then
+  host_session="${USER}@$(hostname -s | cut -c1-4)"
+
+  # Try to attach to our preferred session
+  if tmux has-session -t "$host_session" 2>/dev/null; then
+    exec tmux attach -t "$host_session"
+  # If it doesn't exist but others do, list them and attach to most recent
+  elif tmux list-sessions >/dev/null 2>&1; then
+    exec tmux attach # attaches to most recently used
+  # Only create new if no sessions exist
+  else
+    exec tmux new -s "$host_session"
+  fi
+fi

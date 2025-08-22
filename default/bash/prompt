@@ -2,6 +2,78 @@
 force_color_prompt=yes
 color_prompt=yes
 
-# Simple prompt with path in the window/pane title and caret for typing line
-PS1=$'\uf0a9 '
-PS1="\[\e]0;\w\a\]$PS1"
+# Color definitions
+RESET="\[\e[0m\]"
+DIM="\[\e[2m\]"
+GREEN="\[\e[32m\]"
+BLUE="\[\e[34m\]"
+YELLOW="\[\e[33m\]"
+RED="\[\e[31m\]"
+
+# Git functions
+# Combined git function for better performance
+parse_git_info() {
+  local branch status=""
+
+  # Get branch name (handles detached HEAD)
+  branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+  [[ -z "$branch" ]] && return
+
+  # Get status in one efficient call
+  local git_status=$(git status --porcelain --branch 2>/dev/null)
+
+  # Parse file status
+  if echo "$git_status" | grep -q '^[MADRC]'; then
+    status=" ●" # staged changes
+  elif echo "$git_status" | grep -q '^ [MADRC]'; then
+    status=" ●" # unstaged changes
+  elif echo "$git_status" | grep -q '^??'; then
+    status=" ○" # untracked files
+  fi
+
+  # Parse ahead/behind from the branch status line
+  local branch_line=$(echo "$git_status" | head -n1)
+  if [[ "$branch_line" =~ \[ahead\ ([0-9]+)\] ]]; then
+    status="${status} ↑${BASH_REMATCH[1]}"
+  fi
+  if [[ "$branch_line" =~ \[behind\ ([0-9]+)\] ]]; then
+    status="${status} ↓${BASH_REMATCH[1]}"
+  fi
+  if [[ "$branch_line" =~ \[ahead\ ([0-9]+),\ behind\ ([0-9]+)\] ]]; then
+    status="${status} ↑${BASH_REMATCH[1]}↓${BASH_REMATCH[2]}"
+  fi
+
+  echo "$branch$status"
+}
+
+# Prompt command
+prompt_command() {
+  local EXIT="$?"
+  local HOSTINFO=""
+
+  # Show host info only over SSH
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    HOSTINFO="${DIM}[$USER@${HOSTNAME%%.*}]${RESET} "
+  fi
+
+  # Build clean prompt with newline for better separation
+  PS1="\n${HOSTINFO}${BLUE}\w${RESET}"
+
+  # Add git info only if in a repo (single check, single call)
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    local GIT_INFO=$(parse_git_info)
+    if [[ -n "$GIT_INFO" ]]; then
+      PS1="$PS1${DIM}  (${GIT_INFO})${RESET}"
+    fi
+  fi
+
+  # Add error indicator only on failure
+  if [[ $EXIT -ne 0 ]]; then
+    PS1="$PS1 ${RED}✗${RESET}"
+  fi
+
+  # Put input on separate line
+  PS1="$PS1\n${GREEN}⟶${RESET} "
+}
+
+PROMPT_COMMAND=prompt_command

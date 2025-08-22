@@ -2,6 +2,9 @@
 # (don't mess with these directly, just overwrite them here!)
 source ~/.local/share/autarchy/default/bash/rc
 
+# Non-interactive shell check
+[[ $- != *i* ]] && return
+
 # Add your own exports, aliases, and functions here.
 #
 # Make an alias for invoking commands you use constantly

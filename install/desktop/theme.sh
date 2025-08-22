@@ -25,8 +25,8 @@ for f in ~/.local/share/autarchy/themes/*; do ln -nfs "$f" ~/.config/autarchy/th
 
 # Set initial theme
 mkdir -p ~/.config/autarchy/current
-ln -snf ~/.config/autarchy/themes/tokyo-night ~/.config/autarchy/current/theme
-ln -snf ~/.config/autarchy/current/theme/backgrounds/1-scenery-pink-lakeside-sunset-lake-landscape-scenic-panorama-7680x3215-144.png ~/.config/autarchy/current/background
+ln -snf ~/.config/autarchy/themes/gruvbox ~/.config/autarchy/current/theme
+ln -snf ~/.config/autarchy/themes/gruvbox/backgrounds/arch-linux.png ~/.config/autarchy/current/background
 
 # Set specific app links for current theme
 ln -snf ~/.config/autarchy/current/theme/neovim.lua ~/.config/nvim/lua/plugins/theme.lua

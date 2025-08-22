@@ -1,8 +1,10 @@
 # History control
 shopt -s histappend
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=32768
 HISTFILESIZE="${HISTSIZE}"
+export HISTIGNORE='?:neofetch:history:uptime:ls:...'
+export LESS=-Ri
 
 # Autocompletion
 if [[ ! -v BASH_COMPLETION_VERSINFO && -f /usr/share/bash-completion/bash_completion ]]; then
